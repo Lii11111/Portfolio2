@@ -519,28 +519,28 @@ function App() {
                       <span className="text-xs md:text-sm text-gray-300 font-medium">HTML5</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <SegmentedProgressBar percentage={80} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={80} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">CSS3</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">87%</span>
                     </div>
-                    <SegmentedProgressBar percentage={87} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={87} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">JAVASCRIPT</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">75%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={75} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">SUPABASE</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={65} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                 </div>
 
@@ -550,28 +550,28 @@ function App() {
                       <span className="text-xs md:text-sm text-gray-300 font-medium">FIREBASE</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">70%</span>
                     </div>
-                    <SegmentedProgressBar percentage={70} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={70} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">SQL</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={65} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">NODEJS</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">55%</span>
                     </div>
-                    <SegmentedProgressBar percentage={55} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={55} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">NEXTJS</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">60%</span>
                     </div>
-                    <SegmentedProgressBar percentage={60} animated={technicalInView} />
+                    <SegmentedProgressBar percentage={60} animated={false} />
                   </div>
                 </div>
               </div>

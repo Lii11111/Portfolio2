@@ -88,7 +88,7 @@ const ThreeDCarousel = ({
 
   return (
     <section className="bg-transparent min-w-full mx-auto flex items-center justify-center">
-      <div className="w-full px-4 sm:px-6 lg:px-8 min-w-[350px] md:min-w-[1000px] max-w-7xl">
+      <div className="w-full px-4 sm:px-6 lg:px-8 min-w-[350px] md:min-w-[1000px] max-w-7xl relative" style={{ minHeight: '550px' }}>
         <div
           className="relative overflow-hidden h-[550px]"
           onMouseEnter={() => setIsHovering(true)}
@@ -161,25 +161,6 @@ const ThreeDCarousel = ({
             ))}
           </div>
 
-          <>
-            <button
-              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
-              onClick={() =>
-                setActive((prev) => (prev - 1 + items.length) % items.length)
-              }
-              aria-label="Previous"
-            >
-              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-            <button
-              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
-              onClick={() => setActive((prev) => (prev + 1) % items.length)}
-              aria-label="Next"
-            >
-              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
-            </button>
-          </>
-
           <div className="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-3 z-30">
             {items.map((_, idx) => (
               <button
@@ -195,6 +176,30 @@ const ThreeDCarousel = ({
             ))}
           </div>
         </div>
+
+        {/* Navigation buttons - outside carousel container on mobile */}
+        <>
+          <button
+            className={`absolute top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110 ${
+              isMobile ? '-left-2' : 'left-4'
+            }`}
+            onClick={() =>
+              setActive((prev) => (prev - 1 + items.length) % items.length)
+            }
+            aria-label="Previous"
+          >
+            <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+          <button
+            className={`absolute top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110 ${
+              isMobile ? '-right-2' : 'right-4'
+            }`}
+            onClick={() => setActive((prev) => (prev + 1) % items.length)}
+            aria-label="Next"
+          >
+            <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+          </button>
+        </>
       </div>
     </section>
   )
