@@ -41,6 +41,81 @@ function App() {
     }
   }
 
+  const SegmentedProgressBar = ({ percentage }) => {
+    const totalSegments = 20
+    const filledSegments = Math.round((percentage / 100) * totalSegments)
+    
+    return (
+      <div className="w-full bg-green-900/20 rounded border border-green-400/30 relative backdrop-blur-sm p-1 overflow-hidden">
+        <div className="flex h-4 relative">
+          {/* Shimmer sweep animation */}
+          <div 
+            className="absolute inset-0 z-20 pointer-events-none"
+            style={{
+              background: 'linear-gradient(90deg, transparent 0%, rgba(74, 222, 128, 0.4) 50%, transparent 100%)',
+              animation: 'shimmerSweep 5s ease-in-out infinite',
+              width: '40%',
+            }}
+          ></div>
+          
+          {Array.from({ length: totalSegments }).map((_, index) => {
+            const isFilled = index < filledSegments
+            const isLast = index === totalSegments - 1
+            return (
+              <div key={index} className="relative flex-1" style={{ transform: 'skewX(-8deg)' }}>
+                <div
+                  className={`w-full h-full transition-all duration-500 ease-out ${
+                    isFilled
+                      ? 'bg-gradient-to-br from-green-400/80 via-green-500/90 to-green-400/80'
+                      : 'bg-green-900/30'
+                  }`}
+                  style={{
+                    animation: isFilled 
+                      ? `fillSegment 0.6s ease-out ${index * 0.05}s both, glowPulse 4s ease-in-out infinite ${index * 0.2}s`
+                      : 'none',
+                    boxShadow: isFilled
+                      ? '0 0 8px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.3)'
+                      : 'inset 0 1px 0 rgba(0, 0, 0, 0.2)',
+                    clipPath: index === 0 
+                      ? 'polygon(0 0, calc(100% - 2px) 0, calc(100% - 2px) 100%, 0 100%)'
+                      : index === totalSegments - 1
+                      ? 'polygon(2px 0, 100% 0, 100% 100%, 2px 100%)'
+                      : 'polygon(2px 0, calc(100% - 2px) 0, calc(100% - 2px) 100%, 2px 100%)',
+                    transformOrigin: 'left center',
+                  }}
+                >
+                  {isFilled && (
+                    <>
+                      <div className="w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
+                      <div 
+                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
+                        style={{ 
+                          animation: `shimmer 4s infinite ${index * 0.2}s`,
+                          transform: 'skewX(8deg)'
+                        }}
+                      ></div>
+                    </>
+                  )}
+                </div>
+                {!isLast && (
+                  <div 
+                    className="absolute top-0 bottom-0 w-px bg-green-400/40 z-10 transition-opacity duration-300"
+                    style={{ 
+                      right: '0',
+                      transform: 'skewX(8deg)',
+                      boxShadow: '0 0 2px rgba(74, 222, 128, 0.5)',
+                      opacity: isFilled ? 1 : 0.5
+                    }}
+                  ></div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      </div>
+    )
+  }
+
   return (
     <div className="min-h-screen relative">
       <SmokeyBackground 
@@ -226,33 +301,21 @@ function App() {
                       <span className="text-sm text-gray-300 font-medium">Hardworking</span>
                       <span className="text-sm text-green-300 font-semibold">90%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '90%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{ animation: 'shimmer 2s infinite' }}></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={90} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">Time Management</span>
                       <span className="text-sm text-green-300 font-semibold">90%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '90%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{ animation: 'shimmer 2s infinite' }}></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={90} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Humble</span>
+                      <span className="text-sm text-gray-300 font-medium">Adaptable</span>
                       <span className="text-sm text-green-300 font-semibold">100%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '100%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={100} />
                   </div>
                 </div>
               </div>
@@ -266,33 +329,21 @@ function App() {
                       <span className="text-sm text-gray-300 font-medium">Coding</span>
                       <span className="text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '80%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={80} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">Gaming</span>
                       <span className="text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '80%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={80} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">Watching</span>
                       <span className="text-sm text-green-300 font-semibold">60%</span>
                     </div>
-                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
-                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '60%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
-                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
-                      </div>
-                    </div>
+                    <SegmentedProgressBar percentage={60} />
                   </div>
                 </div>
               </div>
