@@ -2,11 +2,14 @@ import { useState, useEffect } from 'react'
 import './App.css'
 import SmokeyBackground from './components/ui/SmokeyBackground'
 import ThreeDImageCarousel from './components/ui/ThreeDImageCarousel'
+import ThreeDCarousel from './components/ui/ThreeDCarousel'
 
 function App() {
   const [activeSection, setActiveSection] = useState('')
   const [currentTime, setCurrentTime] = useState(new Date())
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false)
+  const [isContactModalOpen, setIsContactModalOpen] = useState(false)
 
   const handleScroll = () => {
     const sections = ['about', 'projects', 'contact']
@@ -122,18 +125,14 @@ function App() {
                   ABOUT ME
                 </button>
                 <button
-                  onClick={() => scrollToSection('projects')}
-                  className={`text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight ${
-                    activeSection === 'projects' ? 'text-green-300' : ''
-                  }`}
+                  onClick={() => setIsProjectsModalOpen(true)}
+                  className="text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight"
                 >
                   PROJECTS
                 </button>
                 <button
-                  onClick={() => scrollToSection('contact')}
-                  className={`text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight ${
-                    activeSection === 'contact' ? 'text-green-300' : ''
-                  }`}
+                  onClick={() => setIsContactModalOpen(true)}
+                  className="text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight"
                 >
                   CONTACT ME
                 </button>
@@ -499,16 +498,16 @@ function App() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">HTML5</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={80} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">CSS3</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">87%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={87} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
@@ -520,9 +519,9 @@ function App() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">SUPABASE</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                 </div>
 
@@ -531,30 +530,30 @@ function App() {
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">FIREBASE</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">70%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={70} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">SQL</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">NODEJS</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">55%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={55} animated={false} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-2">
                       <span className="text-sm text-gray-300 font-medium">NEXTJS</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                      <span className="text-sm text-green-300 font-semibold">60%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={60} animated={false} />
                   </div>
                 </div>
               </div>
@@ -661,7 +660,7 @@ function App() {
                 textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
               }}
             >
-              NAVIGATION
+              EXPLORE ME
             </h2>
             
             <div className="space-y-4">
@@ -676,8 +675,8 @@ function App() {
               </button>
               <button
                 onClick={() => {
-                  scrollToSection('projects')
                   setIsModalOpen(false)
+                  setIsProjectsModalOpen(true)
                 }}
                 className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-xl px-6 py-4 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
@@ -685,13 +684,130 @@ function App() {
               </button>
               <button
                 onClick={() => {
-                  scrollToSection('contact')
                   setIsModalOpen(false)
+                  setIsContactModalOpen(true)
                 }}
                 className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-xl px-6 py-4 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
               >
                 CONTACT ME
               </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Projects Modal */}
+      {isProjectsModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsProjectsModalOpen(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          
+          {/* Modal Content */}
+          <div 
+            className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsProjectsModalOpen(false)}
+              className="absolute top-4 right-4 text-white hover:text-green-300 transition-colors text-2xl"
+            >
+              ×
+            </button>
+            
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
+              style={{ 
+                fontFamily: "'Orbitron', monospace", 
+                textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
+              }}
+            >
+              PROJECTS
+            </h2>
+            
+            {/* 3D Carousel */}
+            <ThreeDCarousel
+              items={[
+                {
+                  id: 1,
+                  title: 'Project 1',
+                  brand: 'Brand Name',
+                  description: 'Project description goes here...',
+                  tags: ['React', 'Tailwind', 'Vite'],
+                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+1',
+                  link: '#'
+                },
+                {
+                  id: 2,
+                  title: 'Project 2',
+                  brand: 'Brand Name',
+                  description: 'Project description goes here...',
+                  tags: ['Next.js', 'TypeScript'],
+                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+2',
+                  link: '#'
+                },
+                {
+                  id: 3,
+                  title: 'Project 3',
+                  brand: 'Brand Name',
+                  description: 'Project description goes here...',
+                  tags: ['Node.js', 'MongoDB'],
+                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+3',
+                  link: '#'
+                },
+                {
+                  id: 4,
+                  title: 'Project 4',
+                  brand: 'Brand Name',
+                  description: 'Project description goes here...',
+                  tags: ['Firebase', 'React'],
+                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+4',
+                  link: '#'
+                }
+              ]}
+              autoRotate={true}
+              rotateInterval={4000}
+            />
+          </div>
+        </div>
+      )}
+
+      {/* Contact Me Modal */}
+      {isContactModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsContactModalOpen(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          
+          {/* Modal Content */}
+          <div 
+            className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 md:p-12 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsContactModalOpen(false)}
+              className="absolute top-4 right-4 text-white hover:text-green-300 transition-colors text-2xl"
+            >
+              ×
+            </button>
+            
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
+              style={{ 
+                fontFamily: "'Orbitron', monospace", 
+                textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
+              }}
+            >
+              CONTACT ME
+            </h2>
+            
+            {/* Contact content will go here */}
+            <div className="text-white text-center">
+              <p className="text-gray-400">Contact form coming soon...</p>
             </div>
           </div>
         </div>
