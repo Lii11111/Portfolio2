@@ -110,38 +110,6 @@ function App() {
         className="fixed inset-0 z-0"
       />
       
-      {/* Sticky Navigation */}
-      <nav className="sticky top-0 z-50 w-full">
-        <div className="container mx-auto px-4">
-          <div className="flex justify-center md:justify-end items-center py-4">
-            <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl px-4 md:px-6 py-3">
-              <div className="flex items-center space-x-4 md:space-x-8">
-                <button
-                  onClick={() => scrollToSection('about')}
-                  className={`text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight ${
-                    activeSection === 'about' ? 'text-green-300' : ''
-                  }`}
-                >
-                  ABOUT ME
-                </button>
-                <button
-                  onClick={() => setIsProjectsModalOpen(true)}
-                  className="text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight"
-                >
-                  PROJECTS
-                </button>
-                <button
-                  onClick={() => setIsContactModalOpen(true)}
-                  className="text-white font-semibold text-xs md:text-sm lg:text-base transition-colors duration-200 hover:text-green-300 tracking-tight"
-                >
-                  CONTACT ME
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
-
       <div className="container mx-auto px-4 md:px-4 lg:px-6 py-16 relative z-10">
         <main className="max-w-7xl mx-auto">
           <section id="about" className="mb-8 scroll-mt-20">
@@ -273,29 +241,29 @@ function App() {
             </div>
 
             {/* Skills, Hobbies, and Gaming Time Section */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+            <div className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-6 mt-12">
               {/* First Column - Soft Skills */}
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 tracking-tight">Soft Skills</h3>
-                <div className="space-y-4">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6">
+                <h3 className="text-xs md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">Soft Skills</h3>
+                <div className="space-y-2 md:space-y-4">
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Hardworking</span>
-                      <span className="text-sm text-green-300 font-semibold">90%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Hardworking</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">90%</span>
                     </div>
                     <SegmentedProgressBar percentage={90} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Time Management</span>
-                      <span className="text-sm text-green-300 font-semibold">90%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Time Management</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">90%</span>
                     </div>
                     <SegmentedProgressBar percentage={90} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Adaptable</span>
-                      <span className="text-sm text-green-300 font-semibold">100%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Adaptable</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">100%</span>
                     </div>
                     <SegmentedProgressBar percentage={100} />
                   </div>
@@ -303,27 +271,27 @@ function App() {
               </div>
 
               {/* Second Column - Hobbies */}
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
-                <h3 className="text-xl font-bold text-white mb-4 tracking-tight">Hobbies</h3>
-                <div className="space-y-4">
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6">
+                <h3 className="text-xs md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">Hobbies</h3>
+                <div className="space-y-2 md:space-y-4">
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Coding</span>
-                      <span className="text-sm text-green-300 font-semibold">80%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Coding</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
                     <SegmentedProgressBar percentage={80} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Gaming</span>
-                      <span className="text-sm text-green-300 font-semibold">80%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Gaming</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
                     <SegmentedProgressBar percentage={80} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">Watching</span>
-                      <span className="text-sm text-green-300 font-semibold">60%</span>
+                    <div className="flex justify-between items-center mb-1 md:mb-2">
+                      <span className="text-[10px] md:text-sm text-gray-300 font-medium">Watching</span>
+                      <span className="text-[10px] md:text-sm text-green-300 font-semibold">60%</span>
                     </div>
                     <SegmentedProgressBar percentage={60} />
                   </div>
@@ -331,9 +299,9 @@ function App() {
               </div>
 
               {/* Third Column - Gaming Time */}
-              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col justify-center items-center">
-                <h3 className="text-xl font-bold text-green-300 mb-4 tracking-wider" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.5)' }}>TIMEZONE</h3>
-                <div className="text-3xl md:text-4xl font-bold text-green-400 tracking-wider whitespace-nowrap" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 15px rgba(74, 222, 128, 0.8), 0 0 30px rgba(74, 222, 128, 0.4)' }}>
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6 flex flex-col justify-center items-center">
+                <h3 className="text-xs md:text-xl font-bold text-green-300 mb-2 md:mb-4 tracking-wider" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.5)' }}>TIMEZONE</h3>
+                <div className="text-sm md:text-4xl font-bold text-green-400 tracking-wider whitespace-nowrap" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 15px rgba(74, 222, 128, 0.8), 0 0 30px rgba(74, 222, 128, 0.4)' }}>
                   {currentTime.toLocaleTimeString('en-US', { 
                     hour: '2-digit', 
                     minute: '2-digit',
@@ -341,7 +309,7 @@ function App() {
                     hour12: true 
                   }).toUpperCase()}
                 </div>
-                <div className="text-lg md:text-xl font-bold text-green-300 tracking-wider mt-3 whitespace-nowrap" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 8px rgba(74, 222, 128, 0.6), 0 0 15px rgba(74, 222, 128, 0.3)' }}>
+                <div className="text-[8px] md:text-xl font-bold text-green-300 tracking-wider mt-1 md:mt-3 whitespace-nowrap text-center" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 8px rgba(74, 222, 128, 0.6), 0 0 15px rgba(74, 222, 128, 0.3)' }}>
                   {currentTime.toLocaleDateString('en-US', { weekday: 'long' })}, {currentTime.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}
                 </div>
               </div>
@@ -492,66 +460,65 @@ function App() {
               </div>
 
               {/* Skills Progress Bars */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
-                {/* Left Column */}
-                <div className="space-y-6">
+              <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 mt-12">
+                {/* Skills Grid - 2 columns on mobile */}
+                <div className="space-y-4 md:space-y-6">
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">HTML5</span>
-                      <span className="text-sm text-green-300 font-semibold">80%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">HTML5</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
                     <SegmentedProgressBar percentage={80} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">CSS3</span>
-                      <span className="text-sm text-green-300 font-semibold">87%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">CSS3</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">87%</span>
                     </div>
                     <SegmentedProgressBar percentage={87} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">JAVASCRIPT</span>
-                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">JAVASCRIPT</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">75%</span>
                     </div>
                     <SegmentedProgressBar percentage={75} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">SUPABASE</span>
-                      <span className="text-sm text-green-300 font-semibold">65%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">SUPABASE</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
                     <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                 </div>
 
-                {/* Right Column */}
-                <div className="space-y-6">
+                <div className="space-y-4 md:space-y-6">
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">FIREBASE</span>
-                      <span className="text-sm text-green-300 font-semibold">70%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">FIREBASE</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">70%</span>
                     </div>
                     <SegmentedProgressBar percentage={70} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">SQL</span>
-                      <span className="text-sm text-green-300 font-semibold">65%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">SQL</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
                     <SegmentedProgressBar percentage={65} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">NODEJS</span>
-                      <span className="text-sm text-green-300 font-semibold">55%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">NODEJS</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">55%</span>
                     </div>
                     <SegmentedProgressBar percentage={55} animated={false} />
                   </div>
                   <div>
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="text-sm text-gray-300 font-medium">NEXTJS</span>
-                      <span className="text-sm text-green-300 font-semibold">60%</span>
+                    <div className="flex justify-between items-center mb-1.5 md:mb-2">
+                      <span className="text-xs md:text-sm text-gray-300 font-medium">NEXTJS</span>
+                      <span className="text-xs md:text-sm text-green-300 font-semibold">60%</span>
                     </div>
                     <SegmentedProgressBar percentage={60} animated={false} />
                   </div>
@@ -705,66 +672,101 @@ function App() {
           {/* Backdrop */}
           <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
           
+          {/* Decorative background elements */}
+          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            <div className="absolute top-20 left-20 w-64 h-64 bg-green-500/10 rounded-full blur-3xl"></div>
+            <div className="absolute bottom-20 right-20 w-96 h-96 bg-green-400/10 rounded-full blur-3xl"></div>
+          </div>
+          
           {/* Modal Content */}
           <div 
-            className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto"
+            className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-4 md:p-8 max-w-6xl w-full max-h-[90vh] overflow-y-auto shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
+            {/* Back Button */}
+            <button
+              onClick={() => {
+                setIsProjectsModalOpen(false)
+                setIsModalOpen(true)
+              }}
+              className="absolute top-4 left-4 w-10 h-10 flex items-center justify-center text-white hover:text-green-300 hover:bg-white/10 rounded-full transition-all duration-300 z-10"
+              aria-label="Back"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              </svg>
+            </button>
+
+            {/* Close Button */}
             <button
               onClick={() => setIsProjectsModalOpen(false)}
-              className="absolute top-4 right-4 text-white hover:text-green-300 transition-colors text-2xl"
+              className="absolute top-4 right-4 w-10 h-10 flex items-center justify-center text-white hover:text-green-300 hover:bg-white/10 rounded-full transition-all duration-300 z-10"
             >
-              ×
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
             </button>
             
-            <h2 
-              className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
-              style={{ 
-                fontFamily: "'Orbitron', monospace", 
-                textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
-              }}
-            >
-              PROJECTS
-            </h2>
+            {/* Header Section */}
+            <div className="text-center mb-8 relative">
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-1 bg-green-400/50 blur-sm"></div>
+              <h2 
+                className="text-3xl md:text-4xl font-bold text-green-300 mb-3 tracking-wider relative"
+                style={{ 
+                  fontFamily: "'Orbitron', monospace", 
+                  textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
+                }}
+              >
+                PROJECTS
+              </h2>
+              <p className="text-gray-400 text-sm md:text-base italic">
+                Explore my latest work and creations
+              </p>
+              <div className="flex items-center justify-center gap-2 mt-4">
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.2s' }}></div>
+                <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: '0.4s' }}></div>
+              </div>
+            </div>
             
             {/* 3D Carousel */}
             <ThreeDCarousel
               items={[
                 {
                   id: 1,
-                  title: 'Project 1',
-                  brand: 'Brand Name',
-                  description: 'Project description goes here...',
+                  title: 'Mini Sari-sari Store Website',
+                  brand: '',
+                  description: 'A simple website with a purpose of viewing and with a feature of monitoring total sales for every sessions.',
                   tags: ['React', 'Tailwind', 'Vite'],
-                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+1',
-                  link: '#'
+                  imageUrl: '/mamas.png',
+                  link: 'https://mamasss.vercel.app/'
                 },
                 {
                   id: 2,
-                  title: 'Project 2',
-                  brand: 'Brand Name',
-                  description: 'Project description goes here...',
-                  tags: ['Next.js', 'TypeScript'],
-                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+2',
-                  link: '#'
+                  title: 'Employee Management System',
+                  brand: '',
+                  description: 'A CRUD system for storing employee data with a backend of Express and a database of Supabase.',
+                  tags: ['React', 'Express', 'Tailwind', 'Supabase'],
+                  imageUrl: '/employee.png',
+                  link: 'https://employee-management-system-psi-beryl.vercel.app/login'
                 },
                 {
                   id: 3,
-                  title: 'Project 3',
-                  brand: 'Brand Name',
-                  description: 'Project description goes here...',
-                  tags: ['Node.js', 'MongoDB'],
-                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+3',
-                  link: '#'
+                  title: 'MetroJobs Website (OJT Project)',
+                  brand: '',
+                  description: 'A manpower website used for viewing purposes of an applicant for the open positions.',
+                  tags: ['HTML', 'CSS', 'Javascript'],
+                  imageUrl: '/metro.png',
+                  link: 'https://metro-jobs.vercel.app/'
                 },
                 {
                   id: 4,
-                  title: 'Project 4',
-                  brand: 'Brand Name',
-                  description: 'Project description goes here...',
-                  tags: ['Firebase', 'React'],
-                  imageUrl: 'https://via.placeholder.com/400x200/0F5132/ffffff?text=Project+4',
-                  link: '#'
+                  title: 'LoopWork',
+                  brand: '',
+                  description: 'Modernized Office Management System that has 16 basic tools including premium one for daily office tasks.',
+                  tags: ['React', 'Express', 'Supabase', 'Tailwind CSS'],
+                  imageUrl: '/loopwork.png',
+                  link: 'https://loopwork-seven.vercel.app/dashboard'
                 }
               ]}
               autoRotate={true}

@@ -117,23 +117,18 @@ const ThreeDCarousel = ({
                       backgroundPosition: 'center',
                     }}
                   >
-                    <div className="absolute inset-0 bg-black/50" />
-                    <div className="relative z-10 text-center text-white">
-                      <h3 className="text-2xl font-bold mb-2">
-                        {item.brand.toUpperCase()}
-                      </h3>
-                      <div className="w-12 h-1 bg-white mx-auto mb-2" />
-                      <p className="text-sm">{item.title}</p>
-                    </div>
+                    <div className="absolute inset-0 bg-black/20" />
                   </div>
 
                     <div className="p-6 flex flex-col flex-grow bg-[#0F5132]/90">
                     <h3 className="text-xl font-bold mb-1 text-white">
                       {item.title}
                     </h3>
-                    <p className="text-gray-300 text-sm font-medium mb-2">
-                      {item.brand}
-                    </p>
+                    {item.brand && (
+                      <p className="text-gray-300 text-sm font-medium mb-2">
+                        {item.brand}
+                      </p>
+                    )}
                     <p className="text-gray-200 text-sm flex-grow">
                       {item.description}
                     </p>
@@ -155,7 +150,7 @@ const ThreeDCarousel = ({
                         rel="noopener noreferrer"
                         className="text-green-300 flex items-center hover:text-green-200 transition-colors relative group"
                       >
-                        <span className="relative z-10">Learn more</span>
+                        <span className="relative z-10">View Project</span>
                         <ArrowRight className="ml-2 w-4 h-4 relative z-10 transition-transform group-hover:translate-x-1" />
                         <span className="absolute left-0 bottom-0 w-0 h-0.5 bg-green-300 transition-all duration-300 group-hover:w-full"></span>
                       </a>
