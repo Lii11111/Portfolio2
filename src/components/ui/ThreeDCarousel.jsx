@@ -134,11 +134,11 @@ const ThreeDCarousel = ({
                     </p>
 
                     <div className="mt-4">
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex gap-2 mb-4 flex-nowrap overflow-x-auto no-scrollbar">
                         {item.tags.map((tag, idx) => (
                           <span
                             key={idx}
-                            className="px-3 py-1 bg-green-500/30 backdrop-blur-sm border border-green-400/50 text-green-300 rounded-full text-xs"
+                            className="px-2 py-0.5 bg-green-500/30 backdrop-blur-sm border border-green-400/50 text-green-200 rounded-full text-[10px] whitespace-nowrap"
                           >
                             {tag}
                           </span>

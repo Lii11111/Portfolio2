@@ -134,6 +134,15 @@ p {
   transform: translateY(0);
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
 @keyframes arrowPulse {
   0%, 100% {
     transform: translateX(0);

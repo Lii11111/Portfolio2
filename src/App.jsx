@@ -163,13 +163,13 @@ function App() {
       
       <div className="container mx-auto px-4 md:px-4 lg:px-6 py-16 relative z-10">
         <main className="max-w-7xl mx-auto">
-          <section id="about" className="mb-8 scroll-mt-20">
+          <section id="about" className="mb-6 md:mb-8 scroll-mt-20">
             <div className="relative">
               {/* Creative layout with image and text */}
               <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-10 items-center justify-items-center lg:justify-items-start">
                 {/* Image Section - First on mobile, left side on desktop */}
-                <div className="relative order-1 lg:order-1 mb-6 lg:mb-0 fade-in-section">
-                  <div className="relative w-full max-w-sm md:max-w-md mx-auto lg:mx-0 lg:mr-0">
+                <div className="relative order-1 lg:order-1 mb-4 md:mb-6 lg:mb-0 fade-in-section">
+                  <div className="relative w-full max-w-[280px] md:max-w-md mx-auto lg:mx-0 lg:mr-0">
                     {/* Decorative background elements */}
                     <div className="absolute -top-4 -right-4 w-32 h-32 bg-green-500/20 rounded-full blur-2xl"></div>
                     
@@ -292,7 +292,7 @@ function App() {
             </div>
 
             {/* Skills, Hobbies, and Gaming Time Section */}
-              <div ref={statsRef} className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-6 mt-12 fade-in-section">
+              <div ref={statsRef} className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-6 mt-6 md:mt-12 fade-in-section">
               {/* First Column - Soft Skills */}
               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6">
                 <h3 className="text-xs md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">Soft Skills</h3>
@@ -367,7 +367,7 @@ function App() {
             </div>
 
             {/* Technical Skills Section */}
-            <div ref={technicalRef} className="mt-16 fade-in-section">
+            <div ref={technicalRef} className="mt-8 md:mt-16 fade-in-section">
               <h3 
                 className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
                 style={{ 
