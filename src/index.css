@@ -123,6 +123,17 @@ p {
 .icon-gaming:nth-child(9) { animation-delay: 3.2s; }
 .icon-gaming:nth-child(10) { animation-delay: 3.6s; }
 
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in-section.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @keyframes arrowPulse {
   0%, 100% {
     transform: translateX(0);

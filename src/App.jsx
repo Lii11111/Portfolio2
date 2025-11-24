@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import './App.css'
 import SmokeyBackground from './components/ui/SmokeyBackground'
 import ThreeDImageCarousel from './components/ui/ThreeDImageCarousel'
@@ -10,6 +10,10 @@ function App() {
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isProjectsModalOpen, setIsProjectsModalOpen] = useState(false)
   const [isContactModalOpen, setIsContactModalOpen] = useState(false)
+  const statsRef = useRef(null)
+  const technicalRef = useRef(null)
+  const [statsInView, setStatsInView] = useState(false)
+  const [technicalInView, setTechnicalInView] = useState(false)
 
   const handleScroll = () => {
     const sections = ['about', 'projects', 'contact']
@@ -37,6 +41,53 @@ function App() {
       setCurrentTime(new Date())
     }, 1000)
     return () => clearInterval(timer)
+  }, [])
+
+  useEffect(() => {
+    const elements = document.querySelectorAll('.fade-in-section')
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible')
+            observer.unobserve(entry.target)
+          }
+        })
+      },
+      { threshold: 0.2 }
+    )
+    elements.forEach((el) => observer.observe(el))
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!statsRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStatsInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(statsRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  useEffect(() => {
+    if (!technicalRef.current) return
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setTechnicalInView(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.3 }
+    )
+    observer.observe(technicalRef.current)
+    return () => observer.disconnect()
   }, [])
 
   const scrollToSection = (sectionId) => {
@@ -117,7 +168,7 @@ function App() {
               {/* Creative layout with image and text */}
               <div className="grid grid-cols-1 lg:grid-cols-[auto_1fr] gap-8 lg:gap-10 items-center justify-items-center lg:justify-items-start">
                 {/* Image Section - First on mobile, left side on desktop */}
-                <div className="relative order-1 lg:order-1 mb-6 lg:mb-0">
+                <div className="relative order-1 lg:order-1 mb-6 lg:mb-0 fade-in-section">
                   <div className="relative w-full max-w-sm md:max-w-md mx-auto lg:mx-0 lg:mr-0">
                     {/* Decorative background elements */}
                     <div className="absolute -top-4 -right-4 w-32 h-32 bg-green-500/20 rounded-full blur-2xl"></div>
@@ -141,7 +192,7 @@ function App() {
                 </div>
 
                 {/* Text Section - Second on mobile, right side on desktop */}
-                <div className="order-2 lg:order-2 space-y-6 text-center lg:text-left lg:pl-0">
+                <div className="order-2 lg:order-2 space-y-6 text-center lg:text-left lg:pl-0 fade-in-section">
                   <div>
                     <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-2 tracking-tight leading-tight">
                       Hi!
@@ -162,15 +213,15 @@ function App() {
                   </div>
 
                   {/* Social Media Links */}
-                  <div className="flex items-center justify-center lg:justify-start gap-3 pt-6">
+                  <div className="flex items-center justify-center lg:justify-start gap-3 pt-6 fade-in-section">
                     <a
                       href="https://github.com/Lii11111"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
                       aria-label="GitHub"
                     >
-                      <svg className="w-5 h-5 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
                       </svg>
                       <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-sm font-semibold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
@@ -182,10 +233,10 @@ function App() {
                       href="https://www.linkedin.com/in/john-lester-esteves-b519aa2b1/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
                       aria-label="LinkedIn"
                     >
-                      <svg className="w-5 h-5 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-6 h-6 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
                       </svg>
                       <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-white/10 backdrop-blur-md border border-white/20 rounded-lg text-sm font-semibold text-white whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none z-50">
@@ -197,7 +248,7 @@ function App() {
                       href="https://www.facebook.com/Liiisjdz/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
                       aria-label="Facebook"
                     >
                       <svg className="w-5 h-5 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -212,7 +263,7 @@ function App() {
                       href="https://www.instagram.com/liisjxvs/"
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
                       aria-label="Instagram"
                     >
                       <svg className="w-5 h-5 text-white hover:text-green-300 transition-colors" fill="currentColor" viewBox="0 0 24 24">
@@ -225,7 +276,7 @@ function App() {
                     
                     <a
                       href="mailto:lesteresteves03@gmail.com"
-                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-3 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
+                      className="group relative bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-4 hover:bg-white/10 hover:border-green-400/50 transition-all duration-300 hover:scale-110"
                       aria-label="Email"
                     >
                       <svg className="w-5 h-5 text-white hover:text-green-300 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -241,7 +292,7 @@ function App() {
             </div>
 
             {/* Skills, Hobbies, and Gaming Time Section */}
-            <div className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-6 mt-12">
+              <div ref={statsRef} className="grid grid-cols-3 md:grid-cols-3 gap-3 md:gap-6 mt-12 fade-in-section">
               {/* First Column - Soft Skills */}
               <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-xl md:rounded-2xl p-3 md:p-6">
                 <h3 className="text-xs md:text-xl font-bold text-white mb-2 md:mb-4 tracking-tight">Soft Skills</h3>
@@ -251,21 +302,21 @@ function App() {
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Hardworking</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">90%</span>
                     </div>
-                    <SegmentedProgressBar percentage={90} />
+                    <SegmentedProgressBar percentage={90} animated={statsInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1 md:mb-2">
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Time Management</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">90%</span>
                     </div>
-                    <SegmentedProgressBar percentage={90} />
+                    <SegmentedProgressBar percentage={90} animated={statsInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1 md:mb-2">
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Adaptable</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">100%</span>
                     </div>
-                    <SegmentedProgressBar percentage={100} />
+                    <SegmentedProgressBar percentage={100} animated={statsInView} />
                   </div>
                 </div>
               </div>
@@ -279,21 +330,21 @@ function App() {
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Coding</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <SegmentedProgressBar percentage={80} />
+                    <SegmentedProgressBar percentage={80} animated={statsInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1 md:mb-2">
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Gaming</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <SegmentedProgressBar percentage={80} />
+                    <SegmentedProgressBar percentage={80} animated={statsInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1 md:mb-2">
                       <span className="text-[10px] md:text-sm text-gray-300 font-medium">Watching</span>
                       <span className="text-[10px] md:text-sm text-green-300 font-semibold">60%</span>
                     </div>
-                    <SegmentedProgressBar percentage={60} />
+                    <SegmentedProgressBar percentage={60} animated={statsInView} />
                   </div>
                 </div>
               </div>
@@ -316,7 +367,7 @@ function App() {
             </div>
 
             {/* Technical Skills Section */}
-            <div className="mt-16">
+            <div ref={technicalRef} className="mt-16 fade-in-section">
               <h3 
                 className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
                 style={{ 
@@ -460,7 +511,7 @@ function App() {
               </div>
 
               {/* Skills Progress Bars */}
-              <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 mt-12">
+                <div className="grid grid-cols-2 md:grid-cols-2 gap-4 md:gap-6 mt-12">
                 {/* Skills Grid - 2 columns on mobile */}
                 <div className="space-y-4 md:space-y-6">
                   <div>
@@ -468,28 +519,28 @@ function App() {
                       <span className="text-xs md:text-sm text-gray-300 font-medium">HTML5</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">80%</span>
                     </div>
-                    <SegmentedProgressBar percentage={80} animated={false} />
+                    <SegmentedProgressBar percentage={80} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">CSS3</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">87%</span>
                     </div>
-                    <SegmentedProgressBar percentage={87} animated={false} />
+                    <SegmentedProgressBar percentage={87} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">JAVASCRIPT</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">75%</span>
                     </div>
-                    <SegmentedProgressBar percentage={75} animated={false} />
+                    <SegmentedProgressBar percentage={75} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">SUPABASE</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={65} animated={false} />
+                    <SegmentedProgressBar percentage={65} animated={technicalInView} />
                   </div>
                 </div>
 
@@ -499,34 +550,34 @@ function App() {
                       <span className="text-xs md:text-sm text-gray-300 font-medium">FIREBASE</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">70%</span>
                     </div>
-                    <SegmentedProgressBar percentage={70} animated={false} />
+                    <SegmentedProgressBar percentage={70} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">SQL</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">65%</span>
                     </div>
-                    <SegmentedProgressBar percentage={65} animated={false} />
+                    <SegmentedProgressBar percentage={65} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">NODEJS</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">55%</span>
                     </div>
-                    <SegmentedProgressBar percentage={55} animated={false} />
+                    <SegmentedProgressBar percentage={55} animated={technicalInView} />
                   </div>
                   <div>
                     <div className="flex justify-between items-center mb-1.5 md:mb-2">
                       <span className="text-xs md:text-sm text-gray-300 font-medium">NEXTJS</span>
                       <span className="text-xs md:text-sm text-green-300 font-semibold">60%</span>
                     </div>
-                    <SegmentedProgressBar percentage={60} animated={false} />
+                    <SegmentedProgressBar percentage={60} animated={technicalInView} />
                   </div>
                 </div>
               </div>
 
               {/* Explore More Button */}
-              <div className="flex items-center justify-center gap-4 mt-8">
+              <div className="flex items-center justify-center gap-4 mt-8 fade-in-section">
                 {/* Left Arrow (pointing right >>) */}
                 <div className="flex gap-1 animate-arrow-pulse">
                   <svg 
