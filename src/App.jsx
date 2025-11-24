@@ -4,6 +4,7 @@ import SmokeyBackground from './components/ui/SmokeyBackground'
 
 function App() {
   const [activeSection, setActiveSection] = useState('')
+  const [currentTime, setCurrentTime] = useState(new Date())
 
   const handleScroll = () => {
     const sections = ['about', 'projects', 'contact']
@@ -24,6 +25,13 @@ function App() {
   useEffect(() => {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentTime(new Date())
+    }, 1000)
+    return () => clearInterval(timer)
   }, [])
 
   const scrollToSection = (sectionId) => {
@@ -203,6 +211,105 @@ function App() {
                       </span>
                     </a>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Skills, Hobbies, and Gaming Time Section */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-12">
+              {/* First Column - Soft Skills */}
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4 tracking-tight">Soft Skills</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Hardworking</span>
+                      <span className="text-sm text-green-300 font-semibold">90%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '90%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{ animation: 'shimmer 2s infinite' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Time Management</span>
+                      <span className="text-sm text-green-300 font-semibold">90%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '90%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent" style={{ animation: 'shimmer 2s infinite' }}></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Humble</span>
+                      <span className="text-sm text-green-300 font-semibold">100%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '100%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Second Column - Hobbies */}
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+                <h3 className="text-xl font-bold text-white mb-4 tracking-tight">Hobbies</h3>
+                <div className="space-y-4">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Coding</span>
+                      <span className="text-sm text-green-300 font-semibold">80%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '80%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Gaming</span>
+                      <span className="text-sm text-green-300 font-semibold">80%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '80%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">Watching</span>
+                      <span className="text-sm text-green-300 font-semibold">60%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-3 overflow-hidden border border-white/20 relative">
+                      <div className="bg-gradient-to-r from-green-400 via-green-500 to-green-400 h-full rounded-full transition-all duration-1000 ease-out relative overflow-hidden" style={{ width: '60%', boxShadow: '0 0 10px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2)' }}>
+                        <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Third Column - Gaming Time */}
+              <div className="bg-white/5 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex flex-col justify-center items-center">
+                <h3 className="text-xl font-bold text-green-300 mb-4 tracking-wider" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.5)' }}>TIMEZONE</h3>
+                <div className="text-3xl md:text-4xl font-bold text-green-400 tracking-wider whitespace-nowrap" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 15px rgba(74, 222, 128, 0.8), 0 0 30px rgba(74, 222, 128, 0.4)' }}>
+                  {currentTime.toLocaleTimeString('en-US', { 
+                    hour: '2-digit', 
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true 
+                  }).toUpperCase()}
+                </div>
+                <div className="text-lg md:text-xl font-bold text-green-300 tracking-wider mt-3 whitespace-nowrap" style={{ fontFamily: "'Orbitron', monospace", textShadow: '0 0 8px rgba(74, 222, 128, 0.6), 0 0 15px rgba(74, 222, 128, 0.3)' }}>
+                  {currentTime.toLocaleDateString('en-US', { weekday: 'long' })}, {currentTime.toLocaleDateString('en-US', { month: '2-digit', day: '2-digit', year: 'numeric' })}
                 </div>
               </div>
             </div>
