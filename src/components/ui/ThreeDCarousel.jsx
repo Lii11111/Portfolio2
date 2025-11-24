@@ -161,26 +161,24 @@ const ThreeDCarousel = ({
             ))}
           </div>
 
-          {!isMobile && (
-            <>
-              <button
-                className="absolute left-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
-                onClick={() =>
-                  setActive((prev) => (prev - 1 + items.length) % items.length)
-                }
-                aria-label="Previous"
-              >
-                <ChevronLeft className="w-5 h-5" />
-              </button>
-              <button
-                className="absolute right-4 top-1/2 -translate-y-1/2 w-10 h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
-                onClick={() => setActive((prev) => (prev + 1) % items.length)}
-                aria-label="Next"
-              >
-                <ChevronRight className="w-5 h-5" />
-              </button>
-            </>
-          )}
+          <>
+            <button
+              className="absolute left-2 md:left-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
+              onClick={() =>
+                setActive((prev) => (prev - 1 + items.length) % items.length)
+              }
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+            <button
+              className="absolute right-2 md:right-4 top-1/2 -translate-y-1/2 w-8 h-8 md:w-10 md:h-10 bg-white/10 backdrop-blur-md border border-white/20 rounded-full flex items-center justify-center text-green-300 hover:bg-white/20 z-30 shadow-lg transition-all hover:scale-110"
+              onClick={() => setActive((prev) => (prev + 1) % items.length)}
+              aria-label="Next"
+            >
+              <ChevronRight className="w-4 h-4 md:w-5 md:h-5" />
+            </button>
+          </>
 
           <div className="absolute bottom-6 left-0 right-0 flex justify-center items-center space-x-3 z-30">
             {items.map((_, idx) => (
