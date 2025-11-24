@@ -1,10 +1,12 @@
 import { useState, useEffect } from 'react'
 import './App.css'
 import SmokeyBackground from './components/ui/SmokeyBackground'
+import ThreeDImageCarousel from './components/ui/ThreeDImageCarousel'
 
 function App() {
   const [activeSection, setActiveSection] = useState('')
   const [currentTime, setCurrentTime] = useState(new Date())
+  const [isModalOpen, setIsModalOpen] = useState(false)
 
   const handleScroll = () => {
     const sections = ['about', 'projects', 'contact']
@@ -41,23 +43,13 @@ function App() {
     }
   }
 
-  const SegmentedProgressBar = ({ percentage }) => {
+  const SegmentedProgressBar = ({ percentage, animated = true }) => {
     const totalSegments = 20
     const filledSegments = Math.round((percentage / 100) * totalSegments)
     
     return (
       <div className="w-full bg-green-900/20 rounded border border-green-400/30 relative backdrop-blur-sm p-1 overflow-hidden">
         <div className="flex h-4 relative">
-          {/* Shimmer sweep animation */}
-          <div 
-            className="absolute inset-0 z-20 pointer-events-none"
-            style={{
-              background: 'linear-gradient(90deg, transparent 0%, rgba(74, 222, 128, 0.4) 50%, transparent 100%)',
-              animation: 'shimmerSweep 5s ease-in-out infinite',
-              width: '40%',
-            }}
-          ></div>
-          
           {Array.from({ length: totalSegments }).map((_, index) => {
             const isFilled = index < filledSegments
             const isLast = index === totalSegments - 1
@@ -70,11 +62,11 @@ function App() {
                       : 'bg-green-900/30'
                   }`}
                   style={{
-                    animation: isFilled 
-                      ? `fillSegment 0.6s ease-out ${index * 0.05}s both, glowPulse 4s ease-in-out infinite ${index * 0.2}s`
+                    animation: animated && isFilled 
+                      ? `fillSegment 0.6s ease-out ${index * 0.05}s both, glowPulse 3s ease-in-out infinite ${index * 0.15}s`
                       : 'none',
                     boxShadow: isFilled
-                      ? '0 0 8px rgba(74, 222, 128, 0.6), inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.3)'
+                      ? '0 0 12px rgba(74, 222, 128, 0.7), 0 0 20px rgba(74, 222, 128, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.3), inset 0 -1px 0 rgba(0, 0, 0, 0.3)'
                       : 'inset 0 1px 0 rgba(0, 0, 0, 0.2)',
                     clipPath: index === 0 
                       ? 'polygon(0 0, calc(100% - 2px) 0, calc(100% - 2px) 100%, 0 100%)'
@@ -85,16 +77,7 @@ function App() {
                   }}
                 >
                   {isFilled && (
-                    <>
-                      <div className="w-full h-full bg-gradient-to-b from-transparent via-white/10 to-transparent"></div>
-                      <div 
-                        className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                        style={{ 
-                          animation: `shimmer 4s infinite ${index * 0.2}s`,
-                          transform: 'skewX(8deg)'
-                        }}
-                      ></div>
-                    </>
+                    <div className="w-full h-full bg-gradient-to-b from-white/20 via-white/10 to-transparent"></div>
                   )}
                 </div>
                 {!isLast && (
@@ -364,9 +347,355 @@ function App() {
                 </div>
               </div>
             </div>
+
+            {/* Technical Skills Section */}
+            <div className="mt-16">
+              <h3 
+                className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
+                style={{ 
+                  fontFamily: "'Orbitron', monospace", 
+                  textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8), 0 0 40px rgba(74, 222, 128, 0.3)'
+                }}
+              >
+                TECHNICAL SKILLS
+              </h3>
+              
+              {/* Auto-scrolling Icons Carousel */}
+              <div className="relative w-full overflow-hidden py-8">
+                <div className="flex animate-scroll gap-12 md:gap-16">
+                  {/* First set of icons */}
+                  <div className="flex gap-12 md:gap-16 items-center flex-shrink-0">
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/tailwind1.png" alt="Tailwind" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/nodejs1.png" alt="Node.js" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/firebase.png" alt="Firebase" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/SQL.png" alt="SQL" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/supabase1.png" alt="Supabase" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                  </div>
+                  {/* Duplicate set for seamless loop */}
+                  <div className="flex gap-12 md:gap-16 items-center flex-shrink-0">
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" alt="JavaScript" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" alt="HTML5" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" alt="CSS3" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/tailwind1.png" alt="Tailwind" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/nodejs1.png" alt="Node.js" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/firebase.png" alt="Firebase" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/SQL.png" alt="SQL" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                    <div className="flex flex-col items-center icon-gaming">
+                      <div className="relative">
+                        <div className="absolute inset-0 bg-green-400/20 blur-xl rounded-full animate-pulse-glow"></div>
+                        <img src="/supabase1.png" alt="Supabase" className="relative w-20 h-20 md:w-24 md:h-24 object-contain filter drop-shadow-[0_0_15px_rgba(74,222,128,0.8)] transition-all duration-300 hover:scale-110 hover:drop-shadow-[0_0_25px_rgba(74,222,128,1)]" />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {/* Skills Progress Bars */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-12">
+                {/* Left Column */}
+                <div className="space-y-6">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">HTML5</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">CSS3</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">JAVASCRIPT</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">SUPABASE</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                </div>
+
+                {/* Right Column */}
+                <div className="space-y-6">
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">FIREBASE</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">SQL</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">NODEJS</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                  <div>
+                    <div className="flex justify-between items-center mb-2">
+                      <span className="text-sm text-gray-300 font-medium">NEXTJS</span>
+                      <span className="text-sm text-green-300 font-semibold">75%</span>
+                    </div>
+                    <SegmentedProgressBar percentage={75} animated={false} />
+                  </div>
+                </div>
+              </div>
+
+              {/* Explore More Button */}
+              <div className="flex items-center justify-center gap-4 mt-8">
+                {/* Left Arrow (pointing right >>) */}
+                <div className="flex gap-1 animate-arrow-pulse">
+                  <svg 
+                    className="w-6 h-6 md:w-8 md:h-8 text-green-300"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.8))'
+                    }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                  <svg 
+                    className="w-6 h-6 md:w-8 md:h-8 text-green-300"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.8))'
+                    }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                  </svg>
+                </div>
+                
+                {/* Button with Container */}
+                <button
+                  onClick={() => setIsModalOpen(true)}
+                  className="bg-white/5 backdrop-blur-sm border border-white/10 hover:border-green-400/50 rounded-xl px-6 md:px-8 py-3 md:py-4 transition-all duration-300 hover:bg-white/10 hover:scale-105"
+                >
+                  <span 
+                    className="text-green-300 italic text-lg md:text-xl font-semibold hover:text-green-200 transition-colors duration-300"
+                    style={{
+                      textShadow: '0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.4), 2px 2px 4px rgba(0, 0, 0, 0.8)'
+                    }}
+                  >
+                    Explore More
+                  </span>
+                </button>
+                
+                {/* Right Arrow (pointing left <<) */}
+                <div className="flex gap-1 animate-arrow-pulse">
+                  <svg 
+                    className="w-6 h-6 md:w-8 md:h-8 text-green-300"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.8))'
+                    }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                  <svg 
+                    className="w-6 h-6 md:w-8 md:h-8 text-green-300"
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                    style={{
+                      filter: 'drop-shadow(0 0 8px rgba(74, 222, 128, 0.8))'
+                    }}
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                  </svg>
+                </div>
+              </div>
+            </div>
           </section>
         </main>
       </div>
+
+      {/* Navigation Modal */}
+      {isModalOpen && (
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center p-4"
+          onClick={() => setIsModalOpen(false)}
+        >
+          {/* Backdrop */}
+          <div className="absolute inset-0 bg-black/70 backdrop-blur-sm"></div>
+          
+          {/* Modal Content */}
+          <div 
+            className="relative bg-white/10 backdrop-blur-md border border-white/20 rounded-2xl p-8 md:p-12 max-w-md w-full"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4 text-white hover:text-green-300 transition-colors text-2xl"
+            >
+              ×
+            </button>
+            
+            <h2 
+              className="text-3xl md:text-4xl font-bold text-green-300 mb-8 text-center tracking-wider"
+              style={{ 
+                fontFamily: "'Orbitron', monospace", 
+                textShadow: '0 0 15px rgba(74, 222, 128, 1), 0 0 30px rgba(74, 222, 128, 0.6), 3px 3px 6px rgba(0, 0, 0, 0.8)'
+              }}
+            >
+              NAVIGATION
+            </h2>
+            
+            <div className="space-y-4">
+              <button
+                onClick={() => {
+                  scrollToSection('about')
+                  setIsModalOpen(false)
+                }}
+                className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-xl px-6 py-4 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
+              >
+                ABOUT ME
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('projects')
+                  setIsModalOpen(false)
+                }}
+                className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-xl px-6 py-4 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
+              >
+                PROJECTS
+              </button>
+              <button
+                onClick={() => {
+                  scrollToSection('contact')
+                  setIsModalOpen(false)
+                }}
+                className="w-full bg-white/5 hover:bg-white/10 border border-white/10 hover:border-green-400/50 rounded-xl px-6 py-4 text-white font-semibold text-lg transition-all duration-300 hover:scale-105"
+              >
+                CONTACT ME
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
